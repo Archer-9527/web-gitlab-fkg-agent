@@ -1,0 +1,1093 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Functional Knowledge Graph v0.1.0",
+  "description": "Project-defined graph snapshot. Structural validation does not prove source entailment or graph semantics.",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "graph_id": {
+      "$ref": "#/$defs/ID"
+    },
+    "lineage_id": {
+      "$ref": "#/$defs/ID"
+    },
+    "application": {
+      "type": "string",
+      "minLength": 1
+    },
+    "application_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "purpose": {
+      "enum": [
+        "production",
+        "example"
+      ]
+    },
+    "root_module_id": {
+      "$ref": "#/$defs/ID"
+    },
+    "source_snapshot": {
+      "type": "object",
+      "properties": {
+        "origin": {
+          "type": "string",
+          "minLength": 1
+        },
+        "git_tag": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "commit": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "manifest_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "scope_description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "excluded_documents": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "path": {
+                "type": "string",
+                "minLength": 1
+              },
+              "reason": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "path",
+              "reason"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "origin",
+        "git_tag",
+        "commit",
+        "manifest_sha256",
+        "scope_description",
+        "excluded_documents"
+      ],
+      "additionalProperties": false
+    },
+    "coverage_status": {
+      "enum": [
+        "complete",
+        "partial"
+      ]
+    },
+    "documents": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Document"
+      },
+      "minItems": 1
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Evidence"
+      },
+      "minItems": 1
+    },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Node"
+      },
+      "minItems": 1
+    },
+    "relations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Relation"
+      },
+      "minItems": 0
+    }
+  },
+  "required": [
+    "schema_version",
+    "graph_id",
+    "lineage_id",
+    "application",
+    "application_version",
+    "created_at",
+    "purpose",
+    "root_module_id",
+    "source_snapshot",
+    "coverage_status",
+    "documents",
+    "evidence",
+    "nodes",
+    "relations"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "ID": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,127}$"
+    },
+    "Support": {
+      "type": "object",
+      "properties": {
+        "mode": {
+          "enum": [
+            "explicit",
+            "inferred"
+          ]
+        },
+        "evidence_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ID"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "rationale": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "review_status": {
+          "enum": [
+            "unreviewed",
+            "accepted"
+          ]
+        }
+      },
+      "required": [
+        "mode",
+        "evidence_ids",
+        "rationale",
+        "review_status"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "mode": {
+                "const": "inferred"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "rationale": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "rationale": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "SupportedText": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "support": {
+          "$ref": "#/$defs/Support"
+        }
+      },
+      "required": [
+        "text",
+        "support"
+      ],
+      "additionalProperties": false
+    },
+    "ClaimAtom": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "atom"
+        },
+        "id": {
+          "$ref": "#/$defs/ID"
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "category": {
+          "enum": [
+            "permission",
+            "configuration",
+            "resource_state",
+            "input",
+            "navigation",
+            "feedback",
+            "other"
+          ]
+        },
+        "support": {
+          "$ref": "#/$defs/Support"
+        }
+      },
+      "required": [
+        "kind",
+        "id",
+        "text",
+        "category",
+        "support"
+      ],
+      "additionalProperties": false
+    },
+    "ClaimExpression": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/ClaimAtom"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "enum": [
+                "all",
+                "any"
+              ]
+            },
+            "items": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/ClaimExpression"
+              },
+              "minItems": 2
+            }
+          },
+          "required": [
+            "kind",
+            "items"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "ClaimField": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "recorded"
+            },
+            "expression": {
+              "$ref": "#/$defs/ClaimExpression"
+            }
+          },
+          "required": [
+            "status",
+            "expression"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "not_documented"
+            },
+            "expression": {
+              "type": "null"
+            }
+          },
+          "required": [
+            "status",
+            "expression"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "unresolved"
+            },
+            "expression": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/ClaimExpression"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "status",
+            "expression"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "Workflow": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/ID"
+        },
+        "label": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SupportedText"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "channel": {
+          "enum": [
+            "ui",
+            "api",
+            "cli",
+            "mixed",
+            "unspecified"
+          ]
+        },
+        "sequence_status": {
+          "enum": [
+            "documented",
+            "partial",
+            "not_documented"
+          ]
+        },
+        "support": {
+          "$ref": "#/$defs/Support"
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "channel",
+        "sequence_status",
+        "support"
+      ],
+      "additionalProperties": false
+    },
+    "WorkflowField": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "recorded"
+            },
+            "items": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/Workflow"
+              },
+              "minItems": 1
+            }
+          },
+          "required": [
+            "status",
+            "items"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "not_documented"
+            },
+            "items": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/Workflow"
+              },
+              "minItems": 0,
+              "maxItems": 0
+            }
+          },
+          "required": [
+            "status",
+            "items"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "unresolved"
+            },
+            "items": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/Workflow"
+              },
+              "minItems": 0
+            }
+          },
+          "required": [
+            "status",
+            "items"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "Module": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/ID"
+        },
+        "name": {
+          "$ref": "#/$defs/SupportedText"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SupportedText"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "aliases": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SupportedText"
+          },
+          "minItems": 0
+        },
+        "node_type": {
+          "const": "Module"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "description",
+        "aliases",
+        "node_type"
+      ],
+      "additionalProperties": false
+    },
+    "Feature": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/ID"
+        },
+        "name": {
+          "$ref": "#/$defs/SupportedText"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SupportedText"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "aliases": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SupportedText"
+          },
+          "minItems": 0
+        },
+        "node_type": {
+          "const": "Feature"
+        },
+        "preconditions": {
+          "$ref": "#/$defs/ClaimField"
+        },
+        "postconditions": {
+          "$ref": "#/$defs/ClaimField"
+        },
+        "workflows": {
+          "$ref": "#/$defs/WorkflowField"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "description",
+        "aliases",
+        "node_type",
+        "preconditions",
+        "postconditions",
+        "workflows"
+      ],
+      "additionalProperties": false
+    },
+    "Step": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/ID"
+        },
+        "name": {
+          "$ref": "#/$defs/SupportedText"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SupportedText"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "aliases": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SupportedText"
+          },
+          "minItems": 0
+        },
+        "node_type": {
+          "const": "Step"
+        },
+        "workflow_id": {
+          "$ref": "#/$defs/ID"
+        },
+        "action": {
+          "$ref": "#/$defs/SupportedText"
+        },
+        "action_type": {
+          "enum": [
+            "navigate",
+            "click",
+            "input",
+            "select",
+            "submit",
+            "command",
+            "api_call",
+            "other",
+            "unspecified"
+          ]
+        },
+        "ui_context": {
+          "type": "object",
+          "properties": {
+            "page": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/SupportedText"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "element": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/SupportedText"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "page",
+            "element"
+          ],
+          "additionalProperties": false
+        },
+        "document_order": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "preconditions": {
+          "$ref": "#/$defs/ClaimField"
+        },
+        "postconditions": {
+          "$ref": "#/$defs/ClaimField"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "description",
+        "aliases",
+        "node_type",
+        "workflow_id",
+        "action",
+        "action_type",
+        "ui_context",
+        "document_order",
+        "preconditions",
+        "postconditions"
+      ],
+      "additionalProperties": false
+    },
+    "Node": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/Module"
+        },
+        {
+          "$ref": "#/$defs/Feature"
+        },
+        {
+          "$ref": "#/$defs/Step"
+        }
+      ]
+    },
+    "Relation": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "$ref": "#/$defs/ID"
+            },
+            "relation_type": {
+              "const": "CONTAINS"
+            },
+            "source_id": {
+              "$ref": "#/$defs/ID"
+            },
+            "target_id": {
+              "$ref": "#/$defs/ID"
+            },
+            "support": {
+              "$ref": "#/$defs/Support"
+            },
+            "details": {
+              "type": "object",
+              "properties": {},
+              "required": [],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "id",
+            "relation_type",
+            "source_id",
+            "target_id",
+            "support",
+            "details"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "$ref": "#/$defs/ID"
+            },
+            "relation_type": {
+              "const": "HAS_STEP"
+            },
+            "source_id": {
+              "$ref": "#/$defs/ID"
+            },
+            "target_id": {
+              "$ref": "#/$defs/ID"
+            },
+            "support": {
+              "$ref": "#/$defs/Support"
+            },
+            "details": {
+              "type": "object",
+              "properties": {},
+              "required": [],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "id",
+            "relation_type",
+            "source_id",
+            "target_id",
+            "support",
+            "details"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "$ref": "#/$defs/ID"
+            },
+            "relation_type": {
+              "const": "NEXT_STEP"
+            },
+            "source_id": {
+              "$ref": "#/$defs/ID"
+            },
+            "target_id": {
+              "$ref": "#/$defs/ID"
+            },
+            "support": {
+              "$ref": "#/$defs/Support"
+            },
+            "details": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "flow_kind": {
+                      "const": "sequence"
+                    },
+                    "guard": {
+                      "type": "null"
+                    }
+                  },
+                  "required": [
+                    "flow_kind",
+                    "guard"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "flow_kind": {
+                      "enum": [
+                        "branch",
+                        "retry"
+                      ]
+                    },
+                    "guard": {
+                      "$ref": "#/$defs/ClaimExpression"
+                    }
+                  },
+                  "required": [
+                    "flow_kind",
+                    "guard"
+                  ],
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "required": [
+            "id",
+            "relation_type",
+            "source_id",
+            "target_id",
+            "support",
+            "details"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "$ref": "#/$defs/ID"
+            },
+            "relation_type": {
+              "const": "REQUIRES_FEATURE"
+            },
+            "source_id": {
+              "$ref": "#/$defs/ID"
+            },
+            "target_id": {
+              "$ref": "#/$defs/ID"
+            },
+            "support": {
+              "$ref": "#/$defs/Support"
+            },
+            "details": {
+              "type": "object",
+              "properties": {},
+              "required": [],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "id",
+            "relation_type",
+            "source_id",
+            "target_id",
+            "support",
+            "details"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "$ref": "#/$defs/ID"
+            },
+            "relation_type": {
+              "const": "REQUIRES_COMPLETION"
+            },
+            "source_id": {
+              "$ref": "#/$defs/ID"
+            },
+            "target_id": {
+              "$ref": "#/$defs/ID"
+            },
+            "support": {
+              "$ref": "#/$defs/Support"
+            },
+            "details": {
+              "type": "object",
+              "properties": {
+                "guard": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/$defs/ClaimExpression"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "guard"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "id",
+            "relation_type",
+            "source_id",
+            "target_id",
+            "support",
+            "details"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "$ref": "#/$defs/ID"
+            },
+            "relation_type": {
+              "const": "USES_OUTPUT_OF"
+            },
+            "source_id": {
+              "$ref": "#/$defs/ID"
+            },
+            "target_id": {
+              "$ref": "#/$defs/ID"
+            },
+            "support": {
+              "$ref": "#/$defs/Support"
+            },
+            "details": {
+              "type": "object",
+              "properties": {
+                "guard": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/$defs/ClaimExpression"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "bindings": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "consumer_condition_id": {
+                        "$ref": "#/$defs/ID"
+                      },
+                      "producer_state_id": {
+                        "$ref": "#/$defs/ID"
+                      }
+                    },
+                    "required": [
+                      "consumer_condition_id",
+                      "producer_state_id"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "minItems": 1
+                }
+              },
+              "required": [
+                "guard",
+                "bindings"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "id",
+            "relation_type",
+            "source_id",
+            "target_id",
+            "support",
+            "details"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "Document": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/ID"
+        },
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "locator": {
+          "type": "string",
+          "minLength": 1
+        },
+        "application_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "content_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "processing_status": {
+          "enum": [
+            "processed",
+            "failed",
+            "pending"
+          ]
+        },
+        "error": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "path",
+        "locator",
+        "application_version",
+        "content_sha256",
+        "processing_status",
+        "error"
+      ],
+      "additionalProperties": false
+    },
+    "Evidence": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/ID"
+        },
+        "document_id": {
+          "$ref": "#/$defs/ID"
+        },
+        "heading_path": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0
+        },
+        "line_start": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "line_end": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "quote": {
+          "type": "string",
+          "minLength": 1
+        },
+        "fragment_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "id",
+        "document_id",
+        "heading_path",
+        "line_start",
+        "line_end",
+        "quote",
+        "fragment_sha256"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

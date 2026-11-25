@@ -1,0 +1,16 @@
+{
+  "models": {
+    "DeepSeek v4 flash": {
+      "providerID": "fkg-deepseek",
+      "id": "deepseek-flash"
+    },
+    "GLM 5.3": {
+      "providerID": "fkg-glm",
+      "id": "glm-5.3"
+    }
+  },
+  "max_tokens": null,
+  "max_usd": null,
+  "timeout_seconds": 900,
+  "note": "API keys are read by OpenCode from ignored .secrets/*.api-key files, not this mapping. Endpoints/models supplied by user; live inference unverified."
+}

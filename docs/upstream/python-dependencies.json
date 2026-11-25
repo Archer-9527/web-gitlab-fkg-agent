@@ -1,0 +1,62 @@
+{
+  "fastapi": {
+    "version": "0.115.6",
+    "requires_python": ">=3.8",
+    "project_urls": {
+      "Changelog": "https://fastapi.tiangolo.com/release-notes/",
+      "Documentation": "https://fastapi.tiangolo.com/",
+      "Homepage": "https://github.com/fastapi/fastapi",
+      "Issues": "https://github.com/fastapi/fastapi/issues",
+      "Repository": "https://github.com/fastapi/fastapi"
+    },
+    "source": "https://pypi.org/pypi/fastapi/0.115.6/json"
+  },
+  "uvicorn": {
+    "version": "0.34.0",
+    "requires_python": ">=3.9",
+    "project_urls": {
+      "Changelog": "https://github.com/encode/uvicorn/blob/master/CHANGELOG.md",
+      "Funding": "https://github.com/sponsors/encode",
+      "Homepage": "https://www.uvicorn.org/",
+      "Source": "https://github.com/encode/uvicorn"
+    },
+    "source": "https://pypi.org/pypi/uvicorn/0.34.0/json"
+  },
+  "httpx": {
+    "version": "0.28.1",
+    "requires_python": ">=3.8",
+    "project_urls": {
+      "Changelog": "https://github.com/encode/httpx/blob/master/CHANGELOG.md",
+      "Documentation": "https://www.python-httpx.org",
+      "Homepage": "https://github.com/encode/httpx",
+      "Source": "https://github.com/encode/httpx"
+    },
+    "source": "https://pypi.org/pypi/httpx/0.28.1/json"
+  },
+  "jsonschema": {
+    "version": "4.23.0",
+    "requires_python": ">=3.8",
+    "project_urls": {
+      "Changelog": "https://github.com/python-jsonschema/jsonschema/blob/main/CHANGELOG.rst",
+      "Documentation": "https://python-jsonschema.readthedocs.io/",
+      "Funding": "https://github.com/sponsors/Julian",
+      "Homepage": "https://github.com/python-jsonschema/jsonschema",
+      "Issues": "https://github.com/python-jsonschema/jsonschema/issues/",
+      "Source": "https://github.com/python-jsonschema/jsonschema",
+      "Tidelift": "https://tidelift.com/subscription/pkg/pypi-jsonschema?utm_source=pypi-jsonschema&utm_medium=referral&utm_campaign=pypi-link"
+    },
+    "source": "https://pypi.org/pypi/jsonschema/4.23.0/json"
+  },
+  "pytest": {
+    "version": "8.3.4",
+    "requires_python": ">=3.8",
+    "project_urls": {
+      "Changelog": "https://docs.pytest.org/en/stable/changelog.html",
+      "Homepage": "https://docs.pytest.org/en/latest/",
+      "Source": "https://github.com/pytest-dev/pytest",
+      "Tracker": "https://github.com/pytest-dev/pytest/issues",
+      "Twitter": "https://twitter.com/pytestdotorg"
+    },
+    "source": "https://pypi.org/pypi/pytest/8.3.4/json"
+  }
+}

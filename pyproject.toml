@@ -1,0 +1,7 @@
+[project]
+name = "gitlab-fkg-agent"
+version = "1.0.0"
+requires-python = ">=3.11"
+description = "Version-pinned functional graph management using an OpenCode runtime agent"
+[tool.pytest.ini_options]
+testpaths = ["tests"]

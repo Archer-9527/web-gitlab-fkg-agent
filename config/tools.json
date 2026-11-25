@@ -1,0 +1,215 @@
+{
+  "version": "1.0.0",
+  "transport": "MCP stdio",
+  "entrypoint": "python -m app.tools",
+  "tools": [
+    {
+      "name": "fkg_context",
+      "description": "Read authorized run metadata, current chunk and candidate summary; no final snapshot writes.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "run_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "run_id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "fkg_schema",
+      "description": "Read the immutable FKG 0.1 schema and domain rules.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "run_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "run_id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "fkg_read",
+      "description": "Read exact immutable original lines (max 251), with source hash and position.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "source_id": {
+            "type": "string"
+          },
+          "document_id": {
+            "type": "string"
+          },
+          "line_start": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "line_end": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "run_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "run_id",
+          "source_id",
+          "document_id",
+          "line_start",
+          "line_end"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "fkg_search",
+      "description": "Cross-file literal retrieval in authorized version only.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "source_id": {
+            "type": "string"
+          },
+          "query": {
+            "type": "string"
+          },
+          "run_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "run_id",
+          "source_id",
+          "query"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "fkg_entities",
+      "description": "Paginated candidate entity lookup; compare meaning before merging.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string"
+          },
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "collection": {
+            "type": "string",
+            "enum": [
+              "nodes",
+              "relations",
+              "evidence"
+            ]
+          },
+          "run_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "run_id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "fkg_identity",
+      "description": "Allocate/reuse opaque identity within run, keyed by semantic identity including context, not name only.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "node",
+              "workflow",
+              "claim",
+              "evidence",
+              "relation"
+            ]
+          },
+          "semantic_key": {
+            "type": "string"
+          },
+          "run_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "run_id",
+          "kind",
+          "semantic_key"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "fkg_diff",
+      "description": "Read deterministic file alignment and direct/indirect impact.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "run_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "run_id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "fkg_validate",
+      "description": "Validate proposed patch, source quotes and graph invariants; no commit.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "patch": {
+            "type": "object"
+          },
+          "run_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "run_id",
+          "patch"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "fkg_stage",
+      "description": "Stage a validated candidate patch as an artifact for backend review; cannot save snapshots.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "patch": {
+            "type": "object"
+          },
+          "run_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "run_id",
+          "patch"
+        ],
+        "additionalProperties": false
+      }
+    }
+  ]
+}

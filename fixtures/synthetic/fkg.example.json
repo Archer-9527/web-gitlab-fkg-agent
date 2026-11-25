@@ -1,0 +1,793 @@
+{
+  "schema_version": "0.1.0",
+  "graph_id": "graph_demo_1",
+  "lineage_id": "lineage_demo",
+  "application": "Schema Demo",
+  "application_version": "demo-1.0",
+  "created_at": "2026-10-30T17:00:00+08:00",
+  "purpose": "example",
+  "root_module_id": "mod_root",
+  "source_snapshot": {
+    "origin": "fixture:synthetic_manual.md",
+    "git_tag": null,
+    "commit": null,
+    "manifest_sha256": "e4f8e194c03d0bf22f01a5b8f83e878e8775960166b7afb4a8812137aeb1e445",
+    "scope_description": "只覆盖同包的虚构示例手册；不是 GitLab 生成结果。",
+    "excluded_documents": []
+  },
+  "coverage_status": "complete",
+  "documents": [
+    {
+      "id": "doc_demo",
+      "path": "synthetic_manual.md",
+      "locator": "fixture:synthetic_manual.md",
+      "application_version": "demo-1.0",
+      "content_sha256": "61cb9a83d013b9c02ac8a9df8ed9266d6a715f3c5119e72309626cb29e25a08a",
+      "processing_status": "processed",
+      "error": null
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev_1",
+      "document_id": "doc_demo",
+      "heading_path": [],
+      "line_start": 1,
+      "line_end": 1,
+      "quote": "# Schema Demo 手册（虚构示例，不是 GitLab 手册）",
+      "fragment_sha256": "fd848c0784e349679c1d210b3d32913894524f0e899a28c5296500a97324f2be"
+    },
+    {
+      "id": "ev_2",
+      "document_id": "doc_demo",
+      "heading_path": [],
+      "line_start": 2,
+      "line_end": 2,
+      "quote": "应用版本：demo-1.0。",
+      "fragment_sha256": "db8b4d4d7c66d41921d20a7ecc2b7d975c321349f383023ebe02b52b306e2698"
+    },
+    {
+      "id": "ev_3",
+      "document_id": "doc_demo",
+      "heading_path": [],
+      "line_start": 3,
+      "line_end": 3,
+      "quote": "## 凭据管理",
+      "fragment_sha256": "f6338e3f6143d8cad6015fed96ab3fee933d1e7d4a02cf08998ff7c442926246"
+    },
+    {
+      "id": "ev_4",
+      "document_id": "doc_demo",
+      "heading_path": [],
+      "line_start": 4,
+      "line_end": 4,
+      "quote": "### 获取凭据",
+      "fragment_sha256": "e92564799c3264abf392d1704007b30fa80385932a638d1258eb0daa5c1af36e"
+    },
+    {
+      "id": "ev_5",
+      "document_id": "doc_demo",
+      "heading_path": [],
+      "line_start": 5,
+      "line_end": 5,
+      "quote": "拥有操作权限的用户可以获取凭据。获取成功后得到一段访问凭据。",
+      "fragment_sha256": "5af8b5cd736bb65cc5a160b2b1f926ca184a0a56b30962151c63c9ac8f64f64f"
+    },
+    {
+      "id": "ev_6",
+      "document_id": "doc_demo",
+      "heading_path": [],
+      "line_start": 6,
+      "line_end": 6,
+      "quote": "界面方式：进入凭据页面，随后选择“生成”。生成成功后显示访问凭据。",
+      "fragment_sha256": "3643c8706192cb31cb703ce5e1be17dddd8191fe933fb49604cba8992c67d19c"
+    },
+    {
+      "id": "ev_7",
+      "document_id": "doc_demo",
+      "heading_path": [],
+      "line_start": 7,
+      "line_end": 7,
+      "quote": "接口方式：调用文档给定的获取凭据接口，响应返回访问凭据。",
+      "fragment_sha256": "6eaf01af2e19443680188684f25dfb12c5d7fb0adcccadc3f6732efc0207a7e6"
+    },
+    {
+      "id": "ev_8",
+      "document_id": "doc_demo",
+      "heading_path": [],
+      "line_start": 8,
+      "line_end": 8,
+      "quote": "### 提交请求",
+      "fragment_sha256": "f2e2f57c9d146135dc28e62fdfd09aeb14b5871d91633c4c22578967b2ccfcf4"
+    },
+    {
+      "id": "ev_9",
+      "document_id": "doc_demo",
+      "heading_path": [],
+      "line_start": 9,
+      "line_end": 9,
+      "quote": "拥有操作权限的用户可以提交请求，提交时必须输入获取凭据功能返回的访问凭据。",
+      "fragment_sha256": "00763efe3ba2bd4b06aa86872e6b02b827ce94c84981664415b42e2e4f280907"
+    },
+    {
+      "id": "ev_10",
+      "document_id": "doc_demo",
+      "heading_path": [],
+      "line_start": 10,
+      "line_end": 10,
+      "quote": "用户填写访问凭据，然后提交表单。成功后页面显示“提交成功”。",
+      "fragment_sha256": "b8f5909d2286cf667cb813fc6d976b44f8fd148325ba7e8ac21ba69cd23966f7"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "mod_root",
+      "node_type": "Module",
+      "name": {
+        "text": "Schema Demo",
+        "support": {
+          "mode": "explicit",
+          "evidence_ids": [
+            "ev_1"
+          ],
+          "rationale": null,
+          "review_status": "unreviewed"
+        }
+      },
+      "description": null,
+      "aliases": []
+    },
+    {
+      "id": "mod_credentials",
+      "node_type": "Module",
+      "name": {
+        "text": "凭据管理",
+        "support": {
+          "mode": "explicit",
+          "evidence_ids": [
+            "ev_3"
+          ],
+          "rationale": null,
+          "review_status": "unreviewed"
+        }
+      },
+      "description": null,
+      "aliases": []
+    },
+    {
+      "id": "feat_obtain",
+      "node_type": "Feature",
+      "name": {
+        "text": "获取凭据",
+        "support": {
+          "mode": "explicit",
+          "evidence_ids": [
+            "ev_4"
+          ],
+          "rationale": null,
+          "review_status": "unreviewed"
+        }
+      },
+      "description": null,
+      "aliases": [],
+      "preconditions": {
+        "status": "recorded",
+        "expression": {
+          "kind": "atom",
+          "id": "claim_obtain_permission",
+          "text": "拥有操作权限",
+          "category": "permission",
+          "support": {
+            "mode": "explicit",
+            "evidence_ids": [
+              "ev_5"
+            ],
+            "rationale": null,
+            "review_status": "unreviewed"
+          }
+        }
+      },
+      "postconditions": {
+        "status": "recorded",
+        "expression": {
+          "kind": "atom",
+          "id": "claim_obtain_output",
+          "text": "得到一段访问凭据",
+          "category": "resource_state",
+          "support": {
+            "mode": "explicit",
+            "evidence_ids": [
+              "ev_5"
+            ],
+            "rationale": null,
+            "review_status": "unreviewed"
+          }
+        }
+      },
+      "workflows": {
+        "status": "recorded",
+        "items": [
+          {
+            "id": "wf_obtain_ui",
+            "label": {
+              "text": "界面方式",
+              "support": {
+                "mode": "explicit",
+                "evidence_ids": [
+                  "ev_6"
+                ],
+                "rationale": null,
+                "review_status": "unreviewed"
+              }
+            },
+            "channel": "ui",
+            "sequence_status": "documented",
+            "support": {
+              "mode": "explicit",
+              "evidence_ids": [
+                "ev_6"
+              ],
+              "rationale": null,
+              "review_status": "unreviewed"
+            }
+          },
+          {
+            "id": "wf_obtain_api",
+            "label": {
+              "text": "接口方式",
+              "support": {
+                "mode": "explicit",
+                "evidence_ids": [
+                  "ev_7"
+                ],
+                "rationale": null,
+                "review_status": "unreviewed"
+              }
+            },
+            "channel": "api",
+            "sequence_status": "documented",
+            "support": {
+              "mode": "explicit",
+              "evidence_ids": [
+                "ev_7"
+              ],
+              "rationale": null,
+              "review_status": "unreviewed"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "feat_submit",
+      "node_type": "Feature",
+      "name": {
+        "text": "提交请求",
+        "support": {
+          "mode": "explicit",
+          "evidence_ids": [
+            "ev_8"
+          ],
+          "rationale": null,
+          "review_status": "unreviewed"
+        }
+      },
+      "description": null,
+      "aliases": [],
+      "preconditions": {
+        "status": "recorded",
+        "expression": {
+          "kind": "all",
+          "items": [
+            {
+              "kind": "atom",
+              "id": "claim_submit_permission",
+              "text": "拥有操作权限",
+              "category": "permission",
+              "support": {
+                "mode": "explicit",
+                "evidence_ids": [
+                  "ev_9"
+                ],
+                "rationale": null,
+                "review_status": "unreviewed"
+              }
+            },
+            {
+              "kind": "atom",
+              "id": "claim_submit_input",
+              "text": "输入获取凭据功能返回的访问凭据",
+              "category": "input",
+              "support": {
+                "mode": "explicit",
+                "evidence_ids": [
+                  "ev_9"
+                ],
+                "rationale": null,
+                "review_status": "unreviewed"
+              }
+            }
+          ]
+        }
+      },
+      "postconditions": {
+        "status": "recorded",
+        "expression": {
+          "kind": "atom",
+          "id": "claim_submit_success",
+          "text": "页面显示“提交成功”",
+          "category": "feedback",
+          "support": {
+            "mode": "explicit",
+            "evidence_ids": [
+              "ev_10"
+            ],
+            "rationale": null,
+            "review_status": "unreviewed"
+          }
+        }
+      },
+      "workflows": {
+        "status": "recorded",
+        "items": [
+          {
+            "id": "wf_submit_ui",
+            "label": null,
+            "channel": "ui",
+            "sequence_status": "documented",
+            "support": {
+              "mode": "explicit",
+              "evidence_ids": [
+                "ev_10"
+              ],
+              "rationale": null,
+              "review_status": "unreviewed"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "step_open",
+      "node_type": "Step",
+      "name": {
+        "text": "进入凭据页面",
+        "support": {
+          "mode": "explicit",
+          "evidence_ids": [
+            "ev_6"
+          ],
+          "rationale": null,
+          "review_status": "unreviewed"
+        }
+      },
+      "description": null,
+      "aliases": [],
+      "workflow_id": "wf_obtain_ui",
+      "action": {
+        "text": "进入凭据页面",
+        "support": {
+          "mode": "explicit",
+          "evidence_ids": [
+            "ev_6"
+          ],
+          "rationale": null,
+          "review_status": "unreviewed"
+        }
+      },
+      "action_type": "navigate",
+      "ui_context": {
+        "page": {
+          "text": "凭据页面",
+          "support": {
+            "mode": "explicit",
+            "evidence_ids": [
+              "ev_6"
+            ],
+            "rationale": null,
+            "review_status": "unreviewed"
+          }
+        },
+        "element": null
+      },
+      "document_order": 1,
+      "preconditions": {
+        "status": "not_documented",
+        "expression": null
+      },
+      "postconditions": {
+        "status": "not_documented",
+        "expression": null
+      }
+    },
+    {
+      "id": "step_generate",
+      "node_type": "Step",
+      "name": {
+        "text": "选择“生成”",
+        "support": {
+          "mode": "explicit",
+          "evidence_ids": [
+            "ev_6"
+          ],
+          "rationale": null,
+          "review_status": "unreviewed"
+        }
+      },
+      "description": null,
+      "aliases": [],
+      "workflow_id": "wf_obtain_ui",
+      "action": {
+        "text": "选择“生成”",
+        "support": {
+          "mode": "explicit",
+          "evidence_ids": [
+            "ev_6"
+          ],
+          "rationale": null,
+          "review_status": "unreviewed"
+        }
+      },
+      "action_type": "select",
+      "ui_context": {
+        "page": null,
+        "element": {
+          "text": "生成",
+          "support": {
+            "mode": "explicit",
+            "evidence_ids": [
+              "ev_6"
+            ],
+            "rationale": null,
+            "review_status": "unreviewed"
+          }
+        }
+      },
+      "document_order": 2,
+      "preconditions": {
+        "status": "not_documented",
+        "expression": null
+      },
+      "postconditions": {
+        "status": "recorded",
+        "expression": {
+          "kind": "atom",
+          "id": "claim_generate_output",
+          "text": "显示访问凭据",
+          "category": "resource_state",
+          "support": {
+            "mode": "explicit",
+            "evidence_ids": [
+              "ev_6"
+            ],
+            "rationale": null,
+            "review_status": "unreviewed"
+          }
+        }
+      }
+    },
+    {
+      "id": "step_api",
+      "node_type": "Step",
+      "name": {
+        "text": "调用文档给定的获取凭据接口",
+        "support": {
+          "mode": "explicit",
+          "evidence_ids": [
+            "ev_7"
+          ],
+          "rationale": null,
+          "review_status": "unreviewed"
+        }
+      },
+      "description": null,
+      "aliases": [],
+      "workflow_id": "wf_obtain_api",
+      "action": {
+        "text": "调用文档给定的获取凭据接口",
+        "support": {
+          "mode": "explicit",
+          "evidence_ids": [
+            "ev_7"
+          ],
+          "rationale": null,
+          "review_status": "unreviewed"
+        }
+      },
+      "action_type": "api_call",
+      "ui_context": {
+        "page": null,
+        "element": null
+      },
+      "document_order": 1,
+      "preconditions": {
+        "status": "not_documented",
+        "expression": null
+      },
+      "postconditions": {
+        "status": "recorded",
+        "expression": {
+          "kind": "atom",
+          "id": "claim_api_output",
+          "text": "响应返回访问凭据",
+          "category": "resource_state",
+          "support": {
+            "mode": "explicit",
+            "evidence_ids": [
+              "ev_7"
+            ],
+            "rationale": null,
+            "review_status": "unreviewed"
+          }
+        }
+      }
+    },
+    {
+      "id": "step_fill",
+      "node_type": "Step",
+      "name": {
+        "text": "填写访问凭据",
+        "support": {
+          "mode": "explicit",
+          "evidence_ids": [
+            "ev_10"
+          ],
+          "rationale": null,
+          "review_status": "unreviewed"
+        }
+      },
+      "description": null,
+      "aliases": [],
+      "workflow_id": "wf_submit_ui",
+      "action": {
+        "text": "填写访问凭据",
+        "support": {
+          "mode": "explicit",
+          "evidence_ids": [
+            "ev_10"
+          ],
+          "rationale": null,
+          "review_status": "unreviewed"
+        }
+      },
+      "action_type": "input",
+      "ui_context": {
+        "page": null,
+        "element": null
+      },
+      "document_order": 1,
+      "preconditions": {
+        "status": "not_documented",
+        "expression": null
+      },
+      "postconditions": {
+        "status": "not_documented",
+        "expression": null
+      }
+    },
+    {
+      "id": "step_submit",
+      "node_type": "Step",
+      "name": {
+        "text": "提交表单",
+        "support": {
+          "mode": "explicit",
+          "evidence_ids": [
+            "ev_10"
+          ],
+          "rationale": null,
+          "review_status": "unreviewed"
+        }
+      },
+      "description": null,
+      "aliases": [],
+      "workflow_id": "wf_submit_ui",
+      "action": {
+        "text": "提交表单",
+        "support": {
+          "mode": "explicit",
+          "evidence_ids": [
+            "ev_10"
+          ],
+          "rationale": null,
+          "review_status": "unreviewed"
+        }
+      },
+      "action_type": "submit",
+      "ui_context": {
+        "page": null,
+        "element": null
+      },
+      "document_order": 2,
+      "preconditions": {
+        "status": "not_documented",
+        "expression": null
+      },
+      "postconditions": {
+        "status": "not_documented",
+        "expression": null
+      }
+    }
+  ],
+  "relations": [
+    {
+      "id": "edge_1",
+      "relation_type": "CONTAINS",
+      "source_id": "mod_root",
+      "target_id": "mod_credentials",
+      "support": {
+        "mode": "explicit",
+        "evidence_ids": [
+          "ev_3"
+        ],
+        "rationale": null,
+        "review_status": "unreviewed"
+      },
+      "details": {}
+    },
+    {
+      "id": "edge_2",
+      "relation_type": "CONTAINS",
+      "source_id": "mod_credentials",
+      "target_id": "feat_obtain",
+      "support": {
+        "mode": "explicit",
+        "evidence_ids": [
+          "ev_4"
+        ],
+        "rationale": null,
+        "review_status": "unreviewed"
+      },
+      "details": {}
+    },
+    {
+      "id": "edge_3",
+      "relation_type": "CONTAINS",
+      "source_id": "mod_credentials",
+      "target_id": "feat_submit",
+      "support": {
+        "mode": "explicit",
+        "evidence_ids": [
+          "ev_8"
+        ],
+        "rationale": null,
+        "review_status": "unreviewed"
+      },
+      "details": {}
+    },
+    {
+      "id": "edge_4",
+      "relation_type": "HAS_STEP",
+      "source_id": "feat_obtain",
+      "target_id": "step_open",
+      "support": {
+        "mode": "explicit",
+        "evidence_ids": [
+          "ev_6"
+        ],
+        "rationale": null,
+        "review_status": "unreviewed"
+      },
+      "details": {}
+    },
+    {
+      "id": "edge_5",
+      "relation_type": "HAS_STEP",
+      "source_id": "feat_obtain",
+      "target_id": "step_generate",
+      "support": {
+        "mode": "explicit",
+        "evidence_ids": [
+          "ev_6"
+        ],
+        "rationale": null,
+        "review_status": "unreviewed"
+      },
+      "details": {}
+    },
+    {
+      "id": "edge_6",
+      "relation_type": "HAS_STEP",
+      "source_id": "feat_obtain",
+      "target_id": "step_api",
+      "support": {
+        "mode": "explicit",
+        "evidence_ids": [
+          "ev_7"
+        ],
+        "rationale": null,
+        "review_status": "unreviewed"
+      },
+      "details": {}
+    },
+    {
+      "id": "edge_7",
+      "relation_type": "HAS_STEP",
+      "source_id": "feat_submit",
+      "target_id": "step_fill",
+      "support": {
+        "mode": "explicit",
+        "evidence_ids": [
+          "ev_10"
+        ],
+        "rationale": null,
+        "review_status": "unreviewed"
+      },
+      "details": {}
+    },
+    {
+      "id": "edge_8",
+      "relation_type": "HAS_STEP",
+      "source_id": "feat_submit",
+      "target_id": "step_submit",
+      "support": {
+        "mode": "explicit",
+        "evidence_ids": [
+          "ev_10"
+        ],
+        "rationale": null,
+        "review_status": "unreviewed"
+      },
+      "details": {}
+    },
+    {
+      "id": "edge_9",
+      "relation_type": "NEXT_STEP",
+      "source_id": "step_open",
+      "target_id": "step_generate",
+      "support": {
+        "mode": "explicit",
+        "evidence_ids": [
+          "ev_6"
+        ],
+        "rationale": null,
+        "review_status": "unreviewed"
+      },
+      "details": {
+        "flow_kind": "sequence",
+        "guard": null
+      }
+    },
+    {
+      "id": "edge_10",
+      "relation_type": "NEXT_STEP",
+      "source_id": "step_fill",
+      "target_id": "step_submit",
+      "support": {
+        "mode": "explicit",
+        "evidence_ids": [
+          "ev_10"
+        ],
+        "rationale": null,
+        "review_status": "unreviewed"
+      },
+      "details": {
+        "flow_kind": "sequence",
+        "guard": null
+      }
+    },
+    {
+      "id": "edge_11",
+      "relation_type": "USES_OUTPUT_OF",
+      "source_id": "feat_submit",
+      "target_id": "feat_obtain",
+      "support": {
+        "mode": "explicit",
+        "evidence_ids": [
+          "ev_9"
+        ],
+        "rationale": null,
+        "review_status": "unreviewed"
+      },
+      "details": {
+        "guard": null,
+        "bindings": [
+          {
+            "consumer_condition_id": "claim_submit_input",
+            "producer_state_id": "claim_obtain_output"
+          }
+        ]
+      }
+    }
+  ]
+}
